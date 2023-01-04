@@ -8,29 +8,28 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.attornatus.clientes.domain.repositories.ClienteRepository;
+import br.com.attornatus.clientes.business.services.ClienteService;
 
 @RestController
 @RequestMapping("cliente")
 public class ClientesController {
-	
+
 	@Autowired
-	private ClienteRepository clienteRepository;
-	
+	private ClienteService clienteService; 
+		
 	@GetMapping
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok().body(null);
+	    return ResponseEntity.ok().body("oiii");
     }
 
     @PostMapping
     public ResponseEntity<?> create() {
         return ResponseEntity.created(null).build();
     }
-    
+
     @PutMapping(path = "/{uuid}")
     public ResponseEntity<?> update() {
         return ResponseEntity.ok(null);
     }
-	
-	
+
 }

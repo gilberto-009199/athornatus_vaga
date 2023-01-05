@@ -1,6 +1,6 @@
 package br.com.attornatus.clientes.api.controllers;
 
-import org.springframework.boot.context.properties.bind.validation.BindValidationException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -17,7 +16,6 @@ import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.api.response.ResponseError;
 import br.com.attornatus.clientes.business.exception.BusinessException;
 import br.com.attornatus.clientes.domain.exception.DomainException;
-import jakarta.validation.ValidationException;
 
 
 @RestControllerAdvice

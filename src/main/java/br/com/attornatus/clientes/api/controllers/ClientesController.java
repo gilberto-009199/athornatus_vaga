@@ -37,7 +37,7 @@ public class ClientesController {
 
 		var res = new ResponseBody<List<ClienteResponse>>();
 
-		res.setMessage( clienteService.getAllCliente().stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteResponse.class)).collect(Collectors.toList()) );
+		res.setMessage( clienteService.getAll().stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteResponse.class)).collect(Collectors.toList()) );
 
 		return ResponseEntity.ok().body( res );
     }
@@ -45,7 +45,7 @@ public class ClientesController {
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody ClienteRequest cliente) {
     	
-    	ClienteDto dto =  clienteService.createCliente( mapper.map(cliente, ClienteDto.class) );
+    	ClienteDto dto =  clienteService.create( mapper.map(cliente, ClienteDto.class) );
     	
     	var res = new ResponseBody<>( mapper.map(dto, ClienteResponse.class) );
     	
@@ -55,7 +55,7 @@ public class ClientesController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> update(@PathVariable UUID id, @Valid @RequestBody ClienteRequest cliente) {
     	
-    	ClienteDto dto =  clienteService.updateCliente(id, mapper.map(cliente, ClienteDto.class));
+    	ClienteDto dto =  clienteService.update(id, mapper.map(cliente, ClienteDto.class));
     	
     	var res = new ResponseBody<>( mapper.map(dto, ClienteResponse.class) );
     	

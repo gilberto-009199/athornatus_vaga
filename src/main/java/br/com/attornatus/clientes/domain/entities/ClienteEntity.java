@@ -1,11 +1,14 @@
 package br.com.attornatus.clientes.domain.entities;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +24,8 @@ public class ClienteEntity extends BaseEntity{
 	@Column
 	private Date dtNascimento;
 	
-	@OneToMany(mappedBy = "cliente")
-	private List<ClienteEnderecoEntity> listEnderecos;
+	// Carregamento Sujo para facilitar
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<ClienteEnderecoEntity> listEnderecos = new ArrayList();
 	
 }

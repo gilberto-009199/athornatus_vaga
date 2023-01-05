@@ -2,7 +2,10 @@ package br.com.attornatus.clientes.domain.entities;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -30,7 +33,7 @@ public class ClienteEnderecoEntity extends BaseEntity{
 	private Boolean principal;
 	
 	@ManyToOne
-	@JoinColumn(name="cliente")
+	@JoinColumn(name="cliente_id")
 	private ClienteEntity cliente;
 	
 }

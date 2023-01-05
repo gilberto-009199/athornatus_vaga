@@ -1,5 +1,6 @@
 package br.com.attornatus.clientes.api.request;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,6 @@ public class ClienteRequest{
 	@NotNull(message = "{NotNull.cliente.dtNascimento}")
 	private Date dtNascimento;
 	
-	private List<ClienteEnderecoRequest> listEnderecos;
+	private List<ClienteEnderecoRequest> listEnderecos = new ArrayList();
 	
 }

@@ -14,7 +14,7 @@ public class APIException extends RuntimeException {
         this.message = message;
     }
     
-    public APIException(String message, String code) {
+    public APIException(String code, String message) {
         super(message);
         this.message = message;
         this.code = code;

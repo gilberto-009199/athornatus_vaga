@@ -5,16 +5,19 @@ import lombok.Data;
 
 @Data
 public class ClienteEnderecoRequest {
-	
-	@NotBlank(message = "CEP é Obrigatorio")
+
+	@NotBlank(message = "{NotBlank.cliente.endereco.cep}")
 	private String cep;
-	@NotBlank(message = "Cidade é Obrigatorio")
+
+	@NotBlank(message = "{NotBlank.cliente.endereco.cidade}")
 	private String cidade;
-	@NotBlank(message = "numero é Obrigatorio")
+
+	@NotBlank(message = "{NotBlank.cliente.endereco.numero}")
 	private String numero;
-	@NotBlank(message = "Logradouro é Obrigatorio")
+
+	@NotBlank(message = "{NotBlank.cliente.endereco.logradouro}")
 	private String logradouro;
-	
+
 	private Boolean principal;
 
 }

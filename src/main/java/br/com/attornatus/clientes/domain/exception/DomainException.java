@@ -14,7 +14,7 @@ public class DomainException extends RuntimeException {
         this.message = message;
     }
     
-    public DomainException(String message, String code) {
+    public DomainException(String code, String message) {
         super(message);
         this.message = message;
         this.code = code;

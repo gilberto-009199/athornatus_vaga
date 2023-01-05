@@ -10,10 +10,10 @@ import lombok.Data;
 @Data
 public class ClienteRequest{
 
-	@NotBlank(message = "Nome é Obrigatorio")
+	@NotBlank(message = "{NotBlank.cliente.nome}")
 	private String nome;
 
-	@NotNull(message = "dtNasciemnto é Obrigatorio")
+	@NotNull(message = "{NotNull.cliente.dtNascimento}")
 	private Date dtNascimento;
 	
 	private List<ClienteEnderecoRequest> listEnderecos;

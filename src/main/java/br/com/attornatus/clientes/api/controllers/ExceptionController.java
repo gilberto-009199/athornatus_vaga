@@ -1,9 +1,19 @@
 package br.com.attornatus.clientes.api.controllers;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,17 +28,42 @@ import br.com.attornatus.clientes.business.exception.BusinessException;
 import br.com.attornatus.clientes.domain.exception.DomainException;
 
 
-@RestControllerAdvice
+@RestControllerAdvice()
 public class ExceptionController extends ResponseEntityExceptionHandler {
-	
+
+	@Autowired
+	private MessageSource messageSource;
+
 	@ExceptionHandler({APIException.class})
     private ResponseEntity<?> handleAPI(APIException ex) {
-
-		ResponseBody res = new ResponseBody<>(new  ResponseError( ex.getCode(), ex.getMessage()));
+		
+		String message = messageSource.getMessage( ex.getMessage(), null, null);
+		
+		ResponseBody<?> res = new ResponseBody<>(new  ResponseError( ex.getCode(), message));
 		
         return ResponseEntity.badRequest().body( res );
     }
-	
+
+	@ExceptionHandler({BusinessException.class})
+    private ResponseEntity<?> handleBusiness(BusinessException ex) {
+		
+		String message = messageSource.getMessage( ex.getMessage(), null, null);
+		
+		ResponseBody<?> res = new ResponseBody<>(new  ResponseError( ex.getCode(), message));
+		
+        return ResponseEntity.badRequest().body( res );
+    }
+
+	@ExceptionHandler({DomainException.class})
+    private ResponseEntity<?> handleDomain(DomainException ex) {
+		
+		String message = messageSource.getMessage( ex.getMessage(), null, null);
+		
+		ResponseBody<?> res = new ResponseBody<>(new  ResponseError( ex.getCode(), message));
+		
+        return ResponseEntity.badRequest().body( res );
+    }
+
 	// VALIDATION SPRING FRAMEWORK
 	@Override 
 	public ResponseEntity<Object> handleMethodArgumentNotValid(	MethodArgumentNotValidException ex, 
@@ -36,32 +71,25 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 																HttpStatusCode status,
 																WebRequest request) {
 		
-		ResponseError erro = new ResponseError("","");
+		List<ResponseError> erros = new ArrayList<ResponseError>();
 		
 		for(ObjectError methodArgumentNotValidException : ex.getBindingResult().getAllErrors()) {
-			erro.setMessage( methodArgumentNotValidException.getDefaultMessage()); 
-			erro.setCode( "VALID_" + methodArgumentNotValidException.getCode());
+			erros.add( new ResponseError("VALID", methodArgumentNotValidException.getDefaultMessage()) );
 		}
 		
-		ResponseBody res = new ResponseBody<>(erro);
+		ResponseBody<?> res = new ResponseBody<>(erros);
         return ResponseEntity.badRequest().body( res );	 
 	}
 	
-	
-	@ExceptionHandler({BusinessException.class})
-    private ResponseEntity<?> handleBusiness(BusinessException ex) {
+	@Override
+	public ResponseEntity<Object> handleHttpMessageNotReadable(	HttpMessageNotReadableException ex,
+																HttpHeaders headers, 
+																HttpStatusCode status, 
+																WebRequest request) {
 		
-		ResponseBody res = new ResponseBody<>(new  ResponseError( ex.getCode(), ex.getMessage()));
+		ResponseBody<?> res = new ResponseBody<>(new ResponseError( "VALID", ex.getMessage()));
 		
-        return ResponseEntity.badRequest().body( res );
-    }
-	
-	@ExceptionHandler({DomainException.class})
-    private ResponseEntity<?> handleDomain(DomainException ex) {
-		
-		ResponseBody res = new ResponseBody<>(new  ResponseError( ex.getCode(), ex.getMessage()));
-		
-        return ResponseEntity.badRequest().body( res );
-    }
-	
+        return ResponseEntity.badRequest().body( res );	 
+	}
+
 }

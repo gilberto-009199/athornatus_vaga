@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class ResponseError {
 	
-	public ResponseError(String error, String message) {
-		this.error = error;
+	public ResponseError(String code, String message) {
+		this.code = code;
 		this.message = message;
 	}
 	
-	private String error;
+	private String code;
 	private String message;
 	
 }

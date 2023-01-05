@@ -16,7 +16,4 @@ public class ClienteService {
 	private ClienteEnderecoRepository clienteEnderecoRepository;
 	
 	
-	
-	
-	
 }

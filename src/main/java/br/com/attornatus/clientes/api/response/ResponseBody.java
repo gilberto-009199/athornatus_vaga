@@ -4,8 +4,7 @@ import lombok.Data;
 
 @Data
 public class ResponseBody<T> {
-	
-	
+
 	public ResponseBody(T message) {
 		this.message = message;
 	}

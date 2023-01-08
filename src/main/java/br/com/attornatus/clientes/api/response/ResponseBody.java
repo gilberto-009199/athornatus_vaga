@@ -1,5 +1,8 @@
 package br.com.attornatus.clientes.api.response;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,15 +15,15 @@ public class ResponseBody<T> {
 	}
 	
 	public ResponseBody(ResponseError error) {
-		this.error = new ResponseError[] { error };
+		this.error.add(error);
 	}
 	
-	public ResponseBody(ResponseError[] error) {
-		this.error = error;
+	public ResponseBody(List<ResponseError> error) {
+		this.error.addAll(error);
 	}
 	
 	private T message;
 	
-	private ResponseError[] error;
+	private List<ResponseError> error = new ArrayList<>();
 	
 }

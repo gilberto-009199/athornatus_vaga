@@ -18,7 +18,12 @@ import br.com.attornatus.clientes.domain.entities.ClienteEntity;
 public interface ClienteEnderecoRepository extends JpaRepository<ClienteEnderecoEntity, Long>{
 	
 	Optional<ClienteEnderecoEntity> findById(UUID id);
-
+	
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM #{#entityName} e WHERE e.id=:id")
+	void deleteByUUId(@Param("id") UUID id);
+	
 	@Query("SELECT e FROM #{#entityName} e WHERE e.cliente=:cliente")
 	Optional<List<ClienteEnderecoEntity>> findByCliente(@Param("cliente") ClienteEntity cliente);
 	

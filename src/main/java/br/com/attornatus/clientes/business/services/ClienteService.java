@@ -29,6 +29,13 @@ public class ClienteService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	public ClienteDto getById(UUID id) {
+		
+		ClienteEntity clienteEntity = clienteRepository.findById(id).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado"));
+		
+		return mapper.map( clienteEntity, ClienteDto.class );
+	}
+	
 	public List<ClienteDto> getAll(){
 		
 		List<ClienteDto> listClienteResponse = clienteRepository.findAll().stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteDto.class)).collect(Collectors.toList());
@@ -42,11 +49,11 @@ public class ClienteService {
 		
 		cliente.setId(clienteEntity.getId());
 		
-		if(!cliente.getListEnderecos().isEmpty()) {
+		if(!cliente.getEnderecos().isEmpty()) {
 			
-			clienteEnderecoService.createAllClienteEndereco( cliente, cliente.getListEnderecos());
+			clienteEnderecoService.createAllClienteEndereco( cliente, cliente.getEnderecos());
 			
-			cliente.setListEnderecos( clienteEnderecoService.getAllByCliente( cliente ) );
+			cliente.setEnderecos( clienteEnderecoService.getAllByCliente( cliente ) );
 		
 		}
 		
@@ -61,17 +68,25 @@ public class ClienteService {
 		clienteEntity.setNome( cliente.getNome() );
 		clienteEntity.setDtNascimento( cliente.getDtNascimento() );
 		
-		if(!cliente.getListEnderecos().isEmpty()) {
+		if(!cliente.getEnderecos().isEmpty()) {
 			
-			clienteEnderecoService.createAllClienteEndereco( cliente, cliente.getListEnderecos());
+			clienteEnderecoService.createAllClienteEndereco( cliente, cliente.getEnderecos());
 			
-			cliente.setListEnderecos( clienteEnderecoService.getAllByCliente( cliente ) );
+			cliente.setEnderecos( clienteEnderecoService.getAllByCliente( cliente ) );
 			
 		};
 
 		clienteRepository.save( clienteEntity );
 		
 		return cliente;
+	}
+
+	public void delete(UUID id) {
+		
+		ClienteEntity clienteEntity = clienteRepository.findById( id ).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado"));
+		
+		clienteRepository.delete( clienteEntity );
+		
 	}
 	
 	

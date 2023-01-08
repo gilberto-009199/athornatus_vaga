@@ -26,6 +26,6 @@ public class ClienteEntity extends BaseEntity{
 	
 	// Carregamento Sujo para facilitar
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<ClienteEnderecoEntity> listEnderecos = new ArrayList();
+	private List<ClienteEnderecoEntity> enderecos = new ArrayList();
 	
 }

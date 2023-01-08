@@ -17,6 +17,6 @@ public class ClienteRequest{
 	@NotNull(message = "{NotNull.cliente.dtNascimento}")
 	private Date dtNascimento;
 	
-	private List<ClienteEnderecoRequest> listEnderecos = new ArrayList();
+	private List<ClienteEnderecoRequest> enderecos = new ArrayList();
 	
 }

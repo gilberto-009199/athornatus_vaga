@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import br.com.attornatus.clientes.api.request.ClienteRequest;
 import br.com.attornatus.clientes.api.response.ClienteResponse;
 import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
+import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
 import br.com.attornatus.clientes.business.services.ClienteService;
 import jakarta.validation.Valid;
 
@@ -32,6 +34,17 @@ public class ClientesController {
 	@Autowired
 	private ModelMapper mapper;
 
+	@GetMapping(path = "/{id}")
+    public ResponseEntity<?> getById(@PathVariable UUID id) {
+
+		var res = new ResponseBody<ClienteResponse>();
+		var clienteDto = clienteService.getById(id);
+
+		res.setMessage(mapper.map(clienteDto, ClienteResponse.class));
+		
+		return ResponseEntity.ok().body( res );
+    }
+	
 	@GetMapping
     public ResponseEntity<?> getAll() {
 
@@ -60,6 +73,14 @@ public class ClientesController {
     	var res = new ResponseBody<>( mapper.map(dto, ClienteResponse.class) );
     	
         return ResponseEntity.ok(res);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+    	
+    	clienteService.delete( id );
+    	
+        return ResponseEntity.ok(null);
     }
 
 }

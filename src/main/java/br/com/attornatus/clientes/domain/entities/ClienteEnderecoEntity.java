@@ -36,4 +36,7 @@ public class ClienteEnderecoEntity extends BaseEntity{
 	@JoinColumn(name="cliente_id")
 	private ClienteEntity cliente;
 	
+	public boolean isPrincipal() {
+		return this.principal;
+	}
 }

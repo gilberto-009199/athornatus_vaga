@@ -13,6 +13,6 @@ public class ClienteResponse{
 	private UUID id;
 	private String nome;
 	private Date dtNascimento;
-	private List<ClienteEnderecoResponse> listEnderecos;
+	private List<ClienteEnderecoResponse> enderecos;
 	
 }

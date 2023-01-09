@@ -18,7 +18,7 @@ import br.com.attornatus.clientes.domain.entities.ClienteEnderecoEntity;
 import br.com.attornatus.clientes.domain.entities.ClienteEntity;
 import br.com.attornatus.clientes.domain.exception.DomainException;
 import br.com.attornatus.clientes.domain.repositories.ClienteEnderecoRepository;
-import br.com.attornatus.clientes.domain.repositories.ClienteRepository;
+
 
 @Service
 public class ClienteEnderecoService {

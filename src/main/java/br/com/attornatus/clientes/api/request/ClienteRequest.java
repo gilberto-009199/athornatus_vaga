@@ -2,11 +2,10 @@ package br.com.attornatus.clientes.api.request;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,7 +23,7 @@ public class ClienteRequest{
 
 	@Valid
 	@Size(max = 10, message = "{cliente.enderecos.size}")
-	private List<ClienteEnderecoRequest> enderecos = new ArrayList();
+	private List<ClienteEnderecoRequest> enderecos = new ArrayList<ClienteEnderecoRequest>();
 	
 	
 	public ClienteRequest() {}

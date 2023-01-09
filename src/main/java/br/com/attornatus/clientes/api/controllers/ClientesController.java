@@ -2,12 +2,12 @@ package br.com.attornatus.clientes.api.controllers;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,12 +23,8 @@ import br.com.attornatus.clientes.api.request.ClienteRequest;
 import br.com.attornatus.clientes.api.response.ClienteResponse;
 import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
-import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
+
 import br.com.attornatus.clientes.business.services.ClienteService;
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.models.annotations.OpenAPI30;
-import io.swagger.v3.oas.models.annotations.OpenAPI31;
 import jakarta.validation.Valid;
 
 @RestController

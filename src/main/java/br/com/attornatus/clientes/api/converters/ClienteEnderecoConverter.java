@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.attornatus.clientes.api.request.ClienteEnderecoRequest;
-import br.com.attornatus.clientes.api.request.ClienteRequest;
+
 import br.com.attornatus.clientes.api.response.ClienteEnderecoResponse;
-import br.com.attornatus.clientes.api.response.ClienteResponse;
-import br.com.attornatus.clientes.business.dto.ClienteDto;
+
 import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
 import br.com.attornatus.clientes.domain.entities.ClienteEnderecoEntity;
-import br.com.attornatus.clientes.domain.entities.ClienteEntity;
+
 
 @Component
 public class ClienteEnderecoConverter {

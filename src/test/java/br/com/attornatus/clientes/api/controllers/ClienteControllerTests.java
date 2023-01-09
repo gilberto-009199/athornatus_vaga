@@ -1,8 +1,7 @@
 package br.com.attornatus.clientes.api.controllers;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
-import java.util.Calendar;
 
 import java.util.Map;
 import java.util.UUID;
@@ -47,7 +46,7 @@ public class ClienteControllerTests {
 
 			ClienteRequest request = new ClienteRequest("", LocalDate.now());
 
-        	ResponseEntity response = restAPI.postForEntity("/cliente", request, null);
+        	ResponseEntity<ResponseBody<?>> response = restAPI.postForEntity("/cliente", request, null);
 
         	Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
 	}

@@ -1,9 +1,7 @@
 package br.com.attornatus.clientes.api.controllers;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,19 +11,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import br.com.attornatus.clientes.api.request.ClienteEnderecoRequest;
 import br.com.attornatus.clientes.api.request.ClienteRequest;
-import br.com.attornatus.clientes.api.response.ClienteResponse;
+
 import br.com.attornatus.clientes.api.response.ResponseBody;
-import br.com.attornatus.clientes.business.dto.ClienteDto;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)

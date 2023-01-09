@@ -1,0 +1,172 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Clientes e Enderecos",
+		"_postman_id": "08b1462a-359d-3fe4-e671-d51a3c166b56",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "LIST Clientes",
+			"request": {
+				"url": "{{host}}/cliente",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Clientes",
+			"request": {
+				"url": "{{host}}/cliente",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\":\"Gilberto Ramos de Oliveira\",\n\t\"dtNascimento\":\"1999-06-02\",\n\t\"enderecos\": [\n        {\n            \"cep\": \"06434-120\",\n            \"cidade\": \"Barueri\",\n            \"numero\": \"bc7\",\n            \"logradouro\": \"Rua José ilheus\",\n            \"principal\": true\n        }\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Clientes",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Gilberto Ramos de Oliveira Santos\",\n    \"dtNascimento\": \"1999-06-02\",\n    \"enderecos\": [\n        {\n            \"cep\": \"06434-120\",\n            \"cidade\": \"Barueri\",\n            \"numero\": \"bc7\",\n            \"logradouro\": \"Rua José ilheus\",\n            \"principal\": true\n        },\n        {\n            \"cep\": \"06458-120\",\n            \"cidade\": \"Barueri\",\n            \"numero\": \"876\",\n            \"logradouro\": \"Rua Campos Sales\",\n            \"principal\": false\n        }\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INFO Cliente",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Cliente",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "LIST Enderecos",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Enderecos",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cep\": \"06437-120\",\n    \"cidade\": \"Barueri\",\n    \"numero\": \"bc7\",\n    \"logradouro\": \"Av. Presidente Washington Luiz\",\n    \"principal\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Enderecos",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco/81dd8b20-be47-4de9-b328-2693a5f7da6b",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cep\": \"06437-120\",\n    \"cidade\": \"Barueri\",\n    \"numero\": \"446\",\n    \"logradouro\": \"Av. Presidente Washington Luiz\",\n    \"principal\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Enderecos",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco/81dd8b20-be47-4de9-b328-2693a5f7da6b",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "INFO Enderecos",
+			"request": {
+				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco/81dd8b20-be47-4de9-b328-2693a5f7da6b",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cep\": \"06437-120\",\n    \"cidade\": \"Barueri\",\n    \"numero\": \"888\",\n    \"logradouro\": \"Av. Presidente Washington Luiz\",\n    \"principal\": false\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

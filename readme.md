@@ -1,7 +1,6 @@
 # Desafio Java
 
-![](https://github.com/gilberto-009199/athornatus_vaga/workflows/test/badge.svg)
-
+[![Java Tests](https://github.com/gilberto-009199/athornatus_vaga/actions/workflows/test.yml/badge.svg)](https://github.com/gilberto-009199/athornatus_vaga/actions/workflows/test.yml)
 
 Usando Spring boot, crie uma API simples para gerenciar Pessoas. Esta API deve permitir:  
     • Criar uma pessoa

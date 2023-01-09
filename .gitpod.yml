@@ -1,7 +1,10 @@
 ports:
 - port: 8080
-  onOpen: open-preview
-# start up tasks
+  onOpen: ignore
 tasks:
-- init: ./mvnw package -DskipTests
-  command: java -jar target/*.jar
+- init: |
+      sudo apt install openjdk-17-jdk openjdk-17-jre -f
+      export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
+      ./mvnw package -DskipTests
+  command: /usr/lib/jvm/java-17-openjdk-amd64/bin/java -jar target/*.jar
+- command: gp preview $(gp url 8080)swagger-ui/index.html

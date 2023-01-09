@@ -8,8 +8,11 @@
 
 ## Links
 - [Execução](#execução)
+- [Status](#status)
 - [Documentação Swagger](#links-da-documenta%C3%A7%C3%A3o)
 
+
+## Descrição
 Usando Spring boot, crie uma API simples para gerenciar Pessoas. Esta API deve permitir:
 + Criar uma pessoa
 + Editar uma pessoa
@@ -28,9 +31,19 @@ Uma Pessoa deve ter os seguintes campos:
     + Número
     + Cidade
 
+## Status
+
+Feature                  | Status  
+-------------------------|--------
+API|:green_circle:
+API Documentação Swagger  |:green_circle:
+Banco de Dados|:green_circle:
+Docker  |:green_circle:
+Tests da API|:green_circle:
+Tests dos Services|:green_circle:
+
 # Execução
  Há duas formas de subir o projeto: instalando direto em sua máquina ou subindo em containeres Docker.
- 
  ### Maven
 ```
  mvn install

@@ -25,6 +25,10 @@ import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
 import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
 import br.com.attornatus.clientes.business.services.ClienteService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.models.annotations.OpenAPI30;
+import io.swagger.v3.oas.models.annotations.OpenAPI31;
 import jakarta.validation.Valid;
 
 @RestController
@@ -45,7 +49,7 @@ public class ClientesController {
 		
 		return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse( clienteDto ) );
     }
-	
+
 	@ResponseStatus(code = HttpStatus.OK)
 	@GetMapping
     public ResponseBody<List<ClienteResponse>> getAll() {

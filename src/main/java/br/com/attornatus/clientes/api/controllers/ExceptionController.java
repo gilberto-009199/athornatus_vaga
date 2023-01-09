@@ -3,20 +3,18 @@ package br.com.attornatus.clientes.api.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -28,44 +26,43 @@ import br.com.attornatus.clientes.business.exception.BusinessException;
 import br.com.attornatus.clientes.domain.exception.DomainException;
 
 
-@RestControllerAdvice()
+
+@RestControllerAdvice(basePackages = {"br.com.attornatus.clientes.api.controllers"})
 public class ExceptionController extends ResponseEntityExceptionHandler {
 
 	@Autowired
 	private MessageSource messageSource;
 
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({APIException.class})
-    private ResponseEntity<?> handleAPI(APIException ex) {
+    private ResponseBody<?> handleAPI(APIException ex) {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
 		
-		ResponseBody<?> res = new ResponseBody<>(new  ResponseError( ex.getCode(), message));
-		
-        return ResponseEntity.badRequest().body( res );
+        return new ResponseBody<>(new  ResponseError( ex.getCode(), message));
     }
 
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({BusinessException.class})
-    private ResponseEntity<?> handleBusiness(BusinessException ex) {
+    private ResponseBody<?> handleBusiness(BusinessException ex) {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
 		
-		ResponseBody<?> res = new ResponseBody<>(new  ResponseError( ex.getCode(), message));
-		
-        return ResponseEntity.badRequest().body( res );
+		return new ResponseBody<>(new  ResponseError( ex.getCode(), message));
     }
-
+	
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@ExceptionHandler({DomainException.class})
-    private ResponseEntity<?> handleDomain(DomainException ex) {
+    private ResponseBody<?> handleDomain(DomainException ex) {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
 		
-		ResponseBody<?> res = new ResponseBody<>(new  ResponseError( ex.getCode(), message));
-		
-        return ResponseEntity.badRequest().body( res );
+        return new ResponseBody<>(new  ResponseError( ex.getCode(), message));
     }
-
+	
 	// VALIDATION SPRING FRAMEWORK
-	@Override 
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@Override
 	public ResponseEntity<Object> handleMethodArgumentNotValid(	MethodArgumentNotValidException ex, 
 																HttpHeaders headers,
 																HttpStatusCode status,
@@ -78,9 +75,11 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		}
 		
 		ResponseBody<?> res = new ResponseBody<>(erros);
+		
         return ResponseEntity.badRequest().body( res );	 
 	}
 	
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	@Override
 	public ResponseEntity<Object> handleHttpMessageNotReadable(	HttpMessageNotReadableException ex,
 																HttpHeaders headers, 

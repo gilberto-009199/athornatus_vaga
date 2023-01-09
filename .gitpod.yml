@@ -5,8 +5,7 @@ tasks:
 - init: |
       sudo apt-get -y update
       sudo apt-get -y install openjdk-17-jdk openjdk-17-jre 
-      export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/"
-      ./mvnw package -DskipTests
+      export JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64/" && ./mvnw package -DskipTests
   command: |
       /usr/lib/jvm/java-17-openjdk-amd64/bin/java -jar target/*.jar
-      gp preview $(gp url 8080)swagger-ui/index.html
+      gp preview $(gp url 8080)/swagger-ui/index.html

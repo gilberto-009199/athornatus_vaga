@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.attornatus.clientes.api.converters.ClienteConverter;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
 import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
 import br.com.attornatus.clientes.domain.entities.ClienteEnderecoEntity;
@@ -19,33 +20,33 @@ import br.com.attornatus.clientes.domain.repositories.ClienteRepository;
 
 @Service
 public class ClienteService {
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private ClienteEnderecoService clienteEnderecoService;
-	
+
 	@Autowired
-	private ModelMapper mapper;
-	
+	private ClienteConverter converter;
+
 	public ClienteDto getById(UUID id) {
 		
 		ClienteEntity clienteEntity = clienteRepository.findById(id).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado"));
 		
-		return mapper.map( clienteEntity, ClienteDto.class );
+		return converter.converterEntityToDto( clienteEntity );
 	}
-	
+
 	public List<ClienteDto> getAll(){
 		
-		List<ClienteDto> listClienteResponse = clienteRepository.findAll().stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteDto.class)).collect(Collectors.toList());
+		List<ClienteDto> listClienteResponse = converter.conveterListEntityToListDto( clienteRepository.findAll() );
 		
 		return listClienteResponse;
 	}
-	
+
 	public ClienteDto create(ClienteDto cliente){
 		
-		ClienteEntity clienteEntity = clienteRepository.save( mapper.map(cliente, ClienteEntity.class) );
+		ClienteEntity clienteEntity = clienteRepository.save( converter.converterDtoToEntity( cliente ) );
 		
 		cliente.setId(clienteEntity.getId());
 		
@@ -59,7 +60,7 @@ public class ClienteService {
 		
 		return cliente;
 	}
-	
+
 	public ClienteDto update(UUID id, ClienteDto cliente){
 		
 		ClienteEntity clienteEntity = clienteRepository.findById(id).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado"));
@@ -86,8 +87,5 @@ public class ClienteService {
 		ClienteEntity clienteEntity = clienteRepository.findById( id ).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado"));
 		
 		clienteRepository.delete( clienteEntity );
-		
 	}
-	
-	
 }

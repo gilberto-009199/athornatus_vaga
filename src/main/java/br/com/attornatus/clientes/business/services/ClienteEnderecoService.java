@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.attornatus.clientes.api.converters.ClienteConverter;
+import br.com.attornatus.clientes.api.converters.ClienteEnderecoConverter;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
 import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
 import br.com.attornatus.clientes.business.exception.BusinessException;
@@ -27,26 +29,28 @@ public class ClienteEnderecoService {
 	@Autowired
 	private ModelMapper mapper;
 	
+	@Autowired
+	private ClienteEnderecoConverter converterEndereco;
+	
+	@Autowired
+	private ClienteConverter converterCliente;
+	
 	public List<ClienteEnderecoDto> getAllByCliente(ClienteDto cliente) {
 
-		return clienteEnderecoRepository.findByCliente(mapper.map(cliente, ClienteEntity.class)).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado")).stream().map(clienteEnderecoEntity -> mapper.map(clienteEnderecoEntity, ClienteEnderecoDto.class)).collect(Collectors.toList());
+		return clienteEnderecoRepository.findByCliente( converterCliente.converterDtoToEntity(cliente) ).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.naoencontrado")).stream().map(clienteEnderecoEntity -> mapper.map(clienteEnderecoEntity, ClienteEnderecoDto.class)).collect(Collectors.toList());
 	}
-
-	
 	
 	public ClienteEnderecoDto getById(UUID id) {
 		
 		ClienteEnderecoEntity clienteEntity = clienteEnderecoRepository.findById(id).orElseThrow(() -> new DomainException("DOM_NotFound","domain.cliente.endereco.naoencontrado"));
 		
-		return mapper.map( clienteEntity, ClienteEnderecoDto.class );
+		return converterEndereco.converterEntityToDto( clienteEntity );
 	}
 	
 	public ClienteEnderecoDto create(ClienteDto clienteDto, ClienteEnderecoDto clienteEndereco){
-		
-		
-		
-		ClienteEntity clienteEntity = mapper.map(clienteDto, ClienteEntity.class);
-		ClienteEnderecoEntity clienteEnderecoEntity = mapper.map(clienteEndereco, ClienteEnderecoEntity.class);
+
+		ClienteEntity clienteEntity = converterCliente.converterDtoToEntity(clienteDto);
+		ClienteEnderecoEntity clienteEnderecoEntity = converterEndereco.converterDtoToEntity( clienteEndereco );
 		
 		clienteEnderecoEntity.setCliente( clienteEntity );
 		
@@ -69,7 +73,7 @@ public class ClienteEnderecoService {
 		
 		clienteEnderecoEntity = clienteEnderecoRepository.save(clienteEnderecoEntity);
 		
-		return mapper.map(clienteEnderecoEntity, ClienteEnderecoDto.class);
+		return converterEndereco.converterEntityToDto(clienteEnderecoEntity);
 	}
 	
 	public ClienteEnderecoDto update(ClienteDto clienteDto, ClienteEnderecoDto clienteEndereco){
@@ -104,12 +108,12 @@ public class ClienteEnderecoService {
 
 		clienteEnderecoEntity = clienteEnderecoRepository.save(clienteEnderecoEntity);
 
-		return mapper.map(clienteEnderecoEntity, ClienteEnderecoDto.class);
+		return converterEndereco.converterEntityToDto( clienteEnderecoEntity );
 	}
 
 	public List<ClienteEnderecoDto> createAllClienteEndereco(ClienteDto clienteDto, List<ClienteEnderecoDto> listEnderecos) {
 		
-		ClienteEntity clienteEntity = mapper.map(clienteDto, ClienteEntity.class);
+		ClienteEntity clienteEntity = converterCliente.converterDtoToEntity( clienteDto );
 		
 		List<ClienteEnderecoEntity> listClienteEndereco = new ArrayList<>();
 		
@@ -130,9 +134,8 @@ public class ClienteEnderecoService {
 		if(countClienteEnderecoPrincipais > 1) throw new BusinessException("BUS_Valid","business.cliente.endereco.doisprincipais");
 		
 		clienteEnderecoRepository.removeAllByCliente( clienteEntity  );
-		
-		return clienteEnderecoRepository.saveAll(listClienteEndereco).stream().map(clienteEnderecoEntity -> mapper.map(clienteEnderecoEntity, ClienteEnderecoDto.class)).collect(Collectors.toList());
-		
+
+		return converterEndereco.conveterListEntityToListDto( clienteEnderecoRepository.saveAll(listClienteEndereco) ) ;
 	}
 
 
@@ -140,7 +143,6 @@ public class ClienteEnderecoService {
 	public void delete(UUID id) {
 		
 		clienteEnderecoRepository.deleteByUUId( id );
-		
 	}
 
 }

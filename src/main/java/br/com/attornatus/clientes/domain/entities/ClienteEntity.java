@@ -1,6 +1,7 @@
 package br.com.attornatus.clientes.domain.entities;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class ClienteEntity extends BaseEntity{
 	private String nome;
 	
 	@Column
-	private Date dtNascimento;
+	private LocalDate dtNascimento;
 	
 	// Carregamento Sujo para facilitar
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

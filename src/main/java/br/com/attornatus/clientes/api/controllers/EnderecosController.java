@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.attornatus.clientes.api.converters.ClienteEnderecoConverter;
 import br.com.attornatus.clientes.api.request.ClienteEnderecoRequest;
 import br.com.attornatus.clientes.api.request.ClienteRequest;
 import br.com.attornatus.clientes.api.response.ClienteEnderecoResponse;
@@ -30,69 +33,58 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("cliente/{idCliente}/endereco")
 public class EnderecosController {
-	
-	
+
 	@Autowired
 	private ClienteEnderecoService clienteEnderecoService; 
 
 	@Autowired
-	private ModelMapper mapper;
-	
-	
+	private ClienteEnderecoConverter converter;
+
+	@ResponseStatus(code = HttpStatus.OK)
 	@GetMapping(path = "/{id}")
-    public ResponseEntity<?> getById( @PathVariable UUID id) {
+    public ResponseBody<ClienteEnderecoResponse> getById( @PathVariable UUID id) {
 		
-		var res = new ResponseBody<ClienteEnderecoResponse>();
-				
 		var endereco = clienteEnderecoService.getById( id );
 		
-		res.setMessage( mapper.map(endereco, ClienteEnderecoResponse.class) );
-		
-        return ResponseEntity.ok().body(res);
-    }
-	
-	@GetMapping
-    public ResponseEntity<?> getAllByClient(@PathVariable UUID idCliente) {
-		
-		var res = new ResponseBody<List<ClienteEnderecoResponse>>();
-				
-		var enderecos = clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) ).stream().map(clienteEnderecoDto -> mapper.map(clienteEnderecoDto, ClienteEnderecoResponse.class)).collect(Collectors.toList());
-		
-		res.setMessage( enderecos );
-		
-        return ResponseEntity.ok().body(res);
+        return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse(endereco) );
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@PathVariable UUID idCliente, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
-    	
-    	ClienteEnderecoDto dto =  clienteEnderecoService.create( new ClienteDto(idCliente), mapper.map(clienteEndereco, ClienteEnderecoDto.class) );
-    	
-    	var res = new ResponseBody<>( mapper.map(dto, ClienteEnderecoResponse.class) );
-    	
-        return ResponseEntity.created(null).body(res);
+	@ResponseStatus(code = HttpStatus.OK)
+	@GetMapping
+    public ResponseBody<List<ClienteEnderecoResponse>> getAllByClient(@PathVariable UUID idCliente) {
+
+		var enderecos = converter.conveterListDtoToListResponse(clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) ));
+
+        return new ResponseBody<List<ClienteEnderecoResponse>>(enderecos);
     }
-    
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID idCliente, @PathVariable UUID id, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
+
+	@ResponseStatus(code = HttpStatus.CREATED)
+    @PostMapping
+    public ResponseBody<ClienteEnderecoResponse> create(@PathVariable UUID idCliente, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
     	
-    	var clienteEnderecoDto = mapper.map(clienteEndereco, ClienteEnderecoDto.class);
+    	ClienteEnderecoDto dto =  clienteEnderecoService.create( new ClienteDto(idCliente), converter.converterRequestToDto(clienteEndereco) );
+    	
+        return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse(dto) );
+    }
+
+	@ResponseStatus(code = HttpStatus.OK)
+    @PutMapping(path = "/{id}")
+    public ResponseBody<ClienteEnderecoResponse> update(@PathVariable UUID idCliente, @PathVariable UUID id, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
+
+    	var clienteEnderecoDto = converter.converterRequestToDto(clienteEndereco);
     	
     	clienteEnderecoDto.setId(id);
     	
     	ClienteEnderecoDto dto =  clienteEnderecoService.update( new ClienteDto(idCliente), clienteEnderecoDto);
     	
-    	var res = new ResponseBody<>( mapper.map(dto, ClienteEnderecoResponse.class) );
-    	
-        return ResponseEntity.ok(res);
+        return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse( dto ) );
     }
-    
+
+	@ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id) {
-    	
+    public void delete(@PathVariable UUID id) {
+
     	clienteEnderecoService.delete( id );
-    	
-        return ResponseEntity.ok(null);
     }
-	
+
 }

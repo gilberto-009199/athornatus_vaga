@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.attornatus.clientes.api.converters.ClienteConverter;
 import br.com.attornatus.clientes.api.request.ClienteRequest;
 import br.com.attornatus.clientes.api.response.ClienteResponse;
 import br.com.attornatus.clientes.api.response.ResponseBody;
@@ -32,55 +35,47 @@ public class ClientesController {
 	private ClienteService clienteService; 
 
 	@Autowired
-	private ModelMapper mapper;
-
+	private ClienteConverter converter;
+	
+	@ResponseStatus(code = HttpStatus.OK)
 	@GetMapping(path = "/{id}")
-    public ResponseEntity<?> getById(@PathVariable UUID id) {
+    public ResponseBody<ClienteResponse> getById(@PathVariable UUID id) {
 
-		var res = new ResponseBody<ClienteResponse>();
 		var clienteDto = clienteService.getById(id);
-
-		res.setMessage(mapper.map(clienteDto, ClienteResponse.class));
 		
-		return ResponseEntity.ok().body( res );
+		return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse( clienteDto ) );
     }
 	
+	@ResponseStatus(code = HttpStatus.OK)
 	@GetMapping
-    public ResponseEntity<?> getAll() {
-
-		var res = new ResponseBody<List<ClienteResponse>>();
-
-		res.setMessage( clienteService.getAll().stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteResponse.class)).collect(Collectors.toList()) );
-
-		return ResponseEntity.ok().body( res );
+    public ResponseBody<List<ClienteResponse>> getAll() {
+		
+		return new ResponseBody<List<ClienteResponse>>( converter.conveterListDtoToListResponse( clienteService.getAll() ) );
     }
 
+	@ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody ClienteRequest cliente) {
+    public ResponseBody<ClienteResponse> create(@Valid @RequestBody ClienteRequest cliente) {
     	
-    	ClienteDto dto =  clienteService.create( mapper.map(cliente, ClienteDto.class) );
+    	ClienteDto dto =  clienteService.create( converter.converterRequestToDto(cliente) );
     	
-    	var res = new ResponseBody<>( mapper.map(dto, ClienteResponse.class) );
-    	
-        return ResponseEntity.created(null).body(res);
+        return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse(dto) );
     }
 
+	@ResponseStatus(code = HttpStatus.OK)
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> update(@PathVariable UUID id, @Valid @RequestBody ClienteRequest cliente) {
+    public ResponseBody<ClienteResponse> update(@PathVariable UUID id, @Valid @RequestBody ClienteRequest cliente) {
     	
-    	ClienteDto dto =  clienteService.update(id, mapper.map(cliente, ClienteDto.class));
+    	ClienteDto dto =  clienteService.update(id, converter.converterRequestToDto(cliente) );
     	
-    	var res = new ResponseBody<>( mapper.map(dto, ClienteResponse.class) );
-    	
-        return ResponseEntity.ok(res);
+        return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse( dto ) );
     }
 
+    @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id) {
+    public void delete(@PathVariable UUID id) {
     	
     	clienteService.delete( id );
-    	
-        return ResponseEntity.ok(null);
     }
 
 }

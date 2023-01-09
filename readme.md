@@ -4,6 +4,7 @@
 # Desafio Java
 [![Java Tests](https://github.com/gilberto-009199/athornatus_vaga/actions/workflows/test.yml/badge.svg)](https://github.com/gilberto-009199/athornatus_vaga/actions/workflows/test.yml)
 
+![Tela inicial](./API_Example.gif)
 
 - [Execução](#execução)
 - [Documentação Swagger](#links-da-documenta%C3%A7%C3%A3o)

@@ -1,5 +1,8 @@
 # Desafio Java
 
+![](https://github.com/gilberto-009199/athornatus_vaga/workflows/test/badge.svg)
+
+
 Usando Spring boot, crie uma API simples para gerenciar Pessoas. Esta API deve permitir:  
     • Criar uma pessoa
     • Editar uma pessoa

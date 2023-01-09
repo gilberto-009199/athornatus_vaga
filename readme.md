@@ -39,6 +39,7 @@ API|:green_circle:
 API Documentação Swagger  |:green_circle:
 Banco de Dados|:green_circle:
 Docker  |:green_circle:
+Log's  |:green_circle:
 Tests da API|:green_circle:
 Tests dos Services|:green_circle:
 

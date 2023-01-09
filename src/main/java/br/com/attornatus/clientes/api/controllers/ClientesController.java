@@ -23,12 +23,13 @@ import br.com.attornatus.clientes.api.request.ClienteRequest;
 import br.com.attornatus.clientes.api.response.ClienteResponse;
 import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
-
 import br.com.attornatus.clientes.business.services.ClienteService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(path = "cliente")
+@Slf4j
 public class ClientesController {
 
 	@Autowired
@@ -41,6 +42,8 @@ public class ClientesController {
 	@GetMapping(path = "/{id}")
     public ResponseBody<ClienteResponse> getById(@PathVariable UUID id) {
 
+		log.info(String.format("REQUEST Cliente %s", id.toString()) );
+		
 		var clienteDto = clienteService.getById(id);
 		
 		return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse( clienteDto ) );
@@ -50,13 +53,17 @@ public class ClientesController {
 	@GetMapping
     public ResponseBody<List<ClienteResponse>> getAll() {
 		
-		return new ResponseBody<List<ClienteResponse>>( converter.conveterListDtoToListResponse( clienteService.getAll() ) );
+		log.info("REQUEST ALL Clientes");
+		
+		return new ResponseBody<List<ClienteResponse>>( converter.converterListDtoToListResponse( clienteService.getAll() ) );
     }
 
 	@ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
     public ResponseBody<ClienteResponse> create(@Valid @RequestBody ClienteRequest cliente) {
     	
+		log.info(String.format("CREATE Cliente %s", cliente.getNome()) );
+		
     	ClienteDto dto =  clienteService.create( converter.converterRequestToDto(cliente) );
     	
         return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse(dto) );
@@ -65,6 +72,8 @@ public class ClientesController {
 	@ResponseStatus(code = HttpStatus.OK)
     @PutMapping(path = "/{id}")
     public ResponseBody<ClienteResponse> update(@PathVariable UUID id, @Valid @RequestBody ClienteRequest cliente) {
+		
+		log.info(String.format("UPDATE Cliente %s", id.toString()) );
     	
     	ClienteDto dto =  clienteService.update(id, converter.converterRequestToDto(cliente) );
     	
@@ -74,6 +83,8 @@ public class ClientesController {
     @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable UUID id) {
+    	
+    	log.info(String.format("DELETE Cliente %s", id.toString()) );
     	
     	clienteService.delete( id );
     }

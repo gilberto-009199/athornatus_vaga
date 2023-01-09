@@ -26,11 +26,14 @@ import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
 import br.com.attornatus.clientes.business.dto.ClienteEnderecoDto;
 import br.com.attornatus.clientes.business.services.ClienteEnderecoService;
+
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
 @RequestMapping("cliente/{idCliente}/endereco")
+@Slf4j
 public class EnderecosController {
 
 	@Autowired
@@ -43,6 +46,8 @@ public class EnderecosController {
 	@GetMapping(path = "/{id}")
     public ResponseBody<ClienteEnderecoResponse> getById( @PathVariable UUID id) {
 		
+		log.info(String.format("REQUEST Cliente Endereco %s", id.toString()) );
+		
 		var endereco = clienteEnderecoService.getById( id );
 		
         return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse(endereco) );
@@ -51,8 +56,10 @@ public class EnderecosController {
 	@ResponseStatus(code = HttpStatus.OK)
 	@GetMapping
     public ResponseBody<List<ClienteEnderecoResponse>> getAllByClient(@PathVariable UUID idCliente) {
-
-		var enderecos = converter.conveterListDtoToListResponse(clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) ));
+		
+		log.info(String.format("REQUEST ALL Cliente %s Endereco ", idCliente.toString()) );
+		
+		var enderecos = converter.converterListDtoToListResponse(clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) ));
 
         return new ResponseBody<List<ClienteEnderecoResponse>>(enderecos);
     }
@@ -60,7 +67,9 @@ public class EnderecosController {
 	@ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping
     public ResponseBody<ClienteEnderecoResponse> create(@PathVariable UUID idCliente, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
-    	
+
+		log.info(String.format("CREATE Cliente %s Endereco %s", idCliente.toString(), clienteEndereco.getCep()) );
+
     	ClienteEnderecoDto dto =  clienteEnderecoService.create( new ClienteDto(idCliente), converter.converterRequestToDto(clienteEndereco) );
     	
         return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse(dto) );
@@ -73,7 +82,9 @@ public class EnderecosController {
     	var clienteEnderecoDto = converter.converterRequestToDto(clienteEndereco);
     	
     	clienteEnderecoDto.setId(id);
-    	
+
+		log.info(String.format( "UPDATE Cliente %s Endereco %s", idCliente.toString(), id.toString() ) );
+
     	ClienteEnderecoDto dto =  clienteEnderecoService.update( new ClienteDto(idCliente), clienteEnderecoDto);
     	
         return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse( dto ) );
@@ -81,8 +92,10 @@ public class EnderecosController {
 
 	@ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping(path = "/{id}")
-    public void delete(@PathVariable UUID id) {
-
+    public void delete(@PathVariable UUID idCliente, @PathVariable UUID id) {
+		
+		log.info(String.format( "DELETE Cliente %s Endereco %s", idCliente.toString(), id.toString() ) );
+		
     	clienteEnderecoService.delete( id );
     }
 

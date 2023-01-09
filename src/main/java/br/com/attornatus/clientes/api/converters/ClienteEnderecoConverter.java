@@ -38,17 +38,17 @@ public class ClienteEnderecoConverter {
 	}
 
 
-	public List<ClienteEnderecoResponse> conveterListDtoToListResponse(List<ClienteEnderecoDto> listDto){
+	public List<ClienteEnderecoResponse> converterListDtoToListResponse(List<ClienteEnderecoDto> listDto){
 
 		return listDto.stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteEnderecoResponse.class)).collect(Collectors.toList());
 	}
 
-	public List<ClienteEnderecoDto> conveterListEntityToListDto(List<ClienteEnderecoEntity> listEntity){
+	public List<ClienteEnderecoDto> converterListEntityToListDto(List<ClienteEnderecoEntity> listEntity){
 
 		return listEntity.stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteEnderecoDto.class)).collect(Collectors.toList());
 	}
 
-	public List<ClienteEnderecoDto> conveterListRequestToListDto(List<ClienteEnderecoDto> listRequest){
+	public List<ClienteEnderecoDto> converterListRequestToListDto(List<ClienteEnderecoDto> listRequest){
 
 		return listRequest.stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteEnderecoDto.class)).collect(Collectors.toList());
 	}

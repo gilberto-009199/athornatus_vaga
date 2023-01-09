@@ -39,17 +39,17 @@ public class ClienteConverter {
 		return mapper.map( entity, ClienteDto.class );
 	}
 
-	public List<ClienteResponse> conveterListDtoToListResponse(List<ClienteDto> listDto){
+	public List<ClienteResponse> converterListDtoToListResponse(List<ClienteDto> listDto){
 
 		return listDto.stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteResponse.class)).collect(Collectors.toList());
 	}
 
-	public List<ClienteDto> conveterListEntityToListDto(List<ClienteEntity> listEntity){
+	public List<ClienteDto> converterListEntityToListDto(List<ClienteEntity> listEntity){
 
 		return listEntity.stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteDto.class)).collect(Collectors.toList());
 	}
 
-	public List<ClienteDto> conveterListRequestToListDto(List<ClienteRequest> listRequest){
+	public List<ClienteDto> converterListRequestToListDto(List<ClienteRequest> listRequest){
 
 		return listRequest.stream().map(clienteEntity -> mapper.map(clienteEntity, ClienteDto.class)).collect(Collectors.toList());
 	}

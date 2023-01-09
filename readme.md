@@ -6,6 +6,7 @@
 
 ![Tela inicial](./API_Example.gif)
 
+## Links
 - [Execução](#execução)
 - [Documentação Swagger](#links-da-documenta%C3%A7%C3%A3o)
 
@@ -42,6 +43,11 @@ Uma Pessoa deve ter os seguintes campos:
  docker build --no-cache --tag=myserver:latest .
  docker run --rm -it -p 8080:8080 myserver:latest
 ```
+### Consumindo API
+  Os links para os arquivos de configuração então abaixo:
+
+  * [DOWNLOAD POSTMAN Collection](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/rest.postman_collection.json) - Postman Collection para consumir a API 
+  * [DOWNLOAD POSTMAN Environment Collection](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/environment.postman_environment.json) - Postman  Environment Collection para consumir a API
 
 ## Bibliotecas
 
@@ -55,6 +61,6 @@ Uma Pessoa deve ter os seguintes campos:
 
 * [Documentacao swagger JSON](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/api-docs.json) - Arquivo de Documentacao em JSON
 * [Documentacao swagger YAML](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/api-docs.yaml) - Arquivo de Documentacao em YAML
- 
+
 ![Documentacao swagger](./swagger-ui-index-html.png)
 

@@ -33,15 +33,15 @@ Uma Pessoa deve ter os seguintes campos:
 
 ## Status
 
-Feature                  | Status  
--------------------------|--------
-API|:green_circle:
-API Documentação Swagger  |:green_circle:
-Banco de Dados|:green_circle:
-Docker  |:green_circle:
-Log's  |:green_circle:
-Tests da API|:green_circle:
-Tests dos Services|:green_circle:
+| Feature                  | Status          |
+|--------------------------|-----------------|
+| API                      | :green_circle:  |
+| API Documentação Swagger | :green_circle:  |
+| Banco de Dados           | :green_circle:  |
+| Docker                   | :green_circle:  |
+| Log's                    | :green_circle:  |
+| Tests da API             | :green_circle:  |
+|  Tests dos Services      | :green_circle:  |
 
 # Execução
  Há duas formas de subir o projeto: instalando direto em sua máquina ou subindo em containeres Docker.

@@ -31,7 +31,7 @@ public class ClienteControllerTests {
 	
 	// CLIENTE CRUD
 	@Test
-	void createClienteValid() {
+	void createValid() {
 
 			ClienteRequest request = new ClienteRequest("Gilberto Ramos de Oliveira", LocalDate.now());
 			String path = "/cliente";
@@ -42,7 +42,7 @@ public class ClienteControllerTests {
 	}
 
 	@Test
-	void createClienteInValid() {
+	void createInValid() {
 
 			ClienteRequest request = new ClienteRequest("", LocalDate.now());
 
@@ -52,7 +52,7 @@ public class ClienteControllerTests {
 	}
 
 	@Test
-	void updateClienteValid() {
+	void updateValid() {
 		
 			ClienteRequest request = new ClienteRequest("Gilberto Ramos de Oliveira", LocalDate.now());
 			String path = "/cliente";
@@ -61,9 +61,9 @@ public class ClienteControllerTests {
 	    	
 	    	ClienteResponse cliente =  new ClienteResponse();
 
-	    	Map entitysHttp = (Map) responseBody.getBody().getMessage();
+	    	Map mapHttp = (Map) responseBody.getBody().getMessage();
 
-	    	cliente.setId( UUID.fromString( entitysHttp.get("id").toString() ));
+	    	cliente.setId( UUID.fromString( mapHttp.get("id").toString() ));
 	    		    	
 			request = new ClienteRequest("Gilberto Ramos de Oliveira Santos", LocalDate.now());
 
@@ -73,15 +73,15 @@ public class ClienteControllerTests {
 
         	responseBody = restAPI.getForEntity( path, ResponseBody.class );
         	
-        	entitysHttp = (Map) responseBody.getBody().getMessage();
+        	mapHttp = (Map) responseBody.getBody().getMessage();
         	
-        	cliente.setNome( (String) entitysHttp.get("nome") );
+        	cliente.setNome( (String) mapHttp.get("nome") );
         	
         	Assertions.assertEquals( cliente.getNome() , request.getNome() );
 	}
 
 	@Test
-	void deleteClienteValid() {
+	void deleteValid() {
 		
 			ClienteRequest request = new ClienteRequest("Sidnei de Oliveira", LocalDate.now());
 			String path = "/cliente";
@@ -90,9 +90,9 @@ public class ClienteControllerTests {
 	    	
 	    	ClienteResponse cliente =  new ClienteResponse();
 
-	    	Map entitysHttp = (Map) responseBody.getBody().getMessage();
+	    	Map mapHttp = (Map) responseBody.getBody().getMessage();
 
-	    	cliente.setId( UUID.fromString( entitysHttp.get("id").toString() ));
+	    	cliente.setId( UUID.fromString( mapHttp.get("id").toString() ));
 	    		    	
 			path += "/"+ cliente.getId().toString();
 			
@@ -104,7 +104,7 @@ public class ClienteControllerTests {
 	}
 	
 	@Test
-	void deleteClienteInValid() {
+	void deleteInValid() {
 
 	    	String path = "/cliente/"+ UUID.randomUUID().toString();
 

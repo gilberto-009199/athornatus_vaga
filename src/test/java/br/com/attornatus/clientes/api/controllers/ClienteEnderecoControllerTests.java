@@ -30,18 +30,18 @@ public class ClienteEnderecoControllerTests {
 	/* Componente para interagir com a API */
 	@Autowired
 	protected TestRestTemplate restAPI;
-	
+
 	// CLIENTE CRUD
 	@Test
-	void createClienteEnderecoValid() {
+	void createValid() {
 
 		ClienteRequest requestCliente = new ClienteRequest("Gilberto Ramos de Oliveira", LocalDate.now());
 		String path = "/cliente";
 		
     	ResponseEntity<ResponseBody> response = restAPI.postForEntity( path, requestCliente, ResponseBody.class);
-    	Map entitysHttp = (Map) response.getBody().getMessage();
+    	Map<String,String> mapHttp = (Map) response.getBody().getMessage();
     	
-    	UUID uuidCliente = UUID.fromString( entitysHttp.get("id").toString() );
+    	UUID uuidCliente = UUID.fromString( mapHttp.get("id").toString() );
     	
     	path += "/"+uuidCliente+"/endereco";
     	
@@ -53,15 +53,15 @@ public class ClienteEnderecoControllerTests {
 	}
 	
 	@Test
-	void createClienteEnderecoInValid() {
+	void createInValid() {
 
 		ClienteRequest requestCliente = new ClienteRequest("Gilberto Ramos de Oliveira", LocalDate.now());
 		String path = "/cliente";
 		
     	ResponseEntity<ResponseBody> response = restAPI.postForEntity( path, requestCliente, ResponseBody.class);
-    	Map entitysHttp = (Map) response.getBody().getMessage();
+    	Map mapHttp = (Map) response.getBody().getMessage();
     	
-    	UUID uuidCliente = UUID.fromString( entitysHttp.get("id").toString() );
+    	UUID uuidCliente = UUID.fromString( mapHttp.get("id").toString() );
     	
     	path += "/"+uuidCliente+"/endereco";
     	
@@ -73,24 +73,24 @@ public class ClienteEnderecoControllerTests {
 	}
 
 	@Test
-	void updateClienteEnderecoValid() {
+	void updateValid() {
 
 		ClienteRequest requestCliente = new ClienteRequest("Gilberto Ramos de Oliveira", LocalDate.now());
 		String path = "/cliente";
 		
     	ResponseEntity<ResponseBody> response = restAPI.postForEntity( path, requestCliente, ResponseBody.class);
-    	Map entitysHttp = (Map) response.getBody().getMessage();
+    	Map mapHttp = (Map) response.getBody().getMessage();
     	
-    	UUID uuidCliente = UUID.fromString( entitysHttp.get("id").toString() );
+    	UUID uuidCliente = UUID.fromString( mapHttp.get("id").toString() );
     	
     	path += "/"+uuidCliente+"/endereco";
     	
     	ClienteEnderecoRequest request = new ClienteEnderecoRequest("06434-120","Barueri","447","Rua Jose Ilheus", true);
     	
     	response = restAPI.postForEntity( path, request, ResponseBody.class);
-    	entitysHttp = (Map) response.getBody().getMessage();
+    	mapHttp = (Map) response.getBody().getMessage();
     	
-    	UUID uuidEndereco = UUID.fromString( entitysHttp.get("id").toString() );
+    	UUID uuidEndereco = UUID.fromString( mapHttp.get("id").toString() );
     	
     	path += "/"+uuidEndereco;
 
@@ -99,32 +99,32 @@ public class ClienteEnderecoControllerTests {
     	restAPI.put( path, request);
     	
     	response = restAPI.getForEntity( path,ResponseBody.class);
-    	entitysHttp = (Map) response.getBody().getMessage();
+    	mapHttp = (Map) response.getBody().getMessage();
     	
-    	String cidade = entitysHttp.get("cidade").toString();
+    	String cidade = mapHttp.get("cidade").toString();
     	    	
     	Assertions.assertEquals( cidade, request.getCidade() );
 	}
 
 	@Test
-	void deleteClienteEnderecoValid() {
+	void deleteValid() {
 		
 		ClienteRequest requestCliente = new ClienteRequest("Gilberto Ramos de Oliveira", LocalDate.now());
 		String path = "/cliente";
 		
     	ResponseEntity<ResponseBody> response = restAPI.postForEntity( path, requestCliente, ResponseBody.class);
-    	Map entitysHttp = (Map) response.getBody().getMessage();
+    	Map mapHttp = (Map) response.getBody().getMessage();
     	
-    	UUID uuidCliente = UUID.fromString( entitysHttp.get("id").toString() );
+    	UUID uuidCliente = UUID.fromString( mapHttp.get("id").toString() );
     	
     	path += "/"+uuidCliente+"/endereco";
     	
     	ClienteEnderecoRequest request = new ClienteEnderecoRequest("06434-120","Barueri","447","Rua Jose Ilheus", true);
     	
     	response = restAPI.postForEntity( path, request, ResponseBody.class);
-    	entitysHttp = (Map) response.getBody().getMessage();
+    	mapHttp = (Map) response.getBody().getMessage();
     	
-    	UUID uuidEndereco = UUID.fromString( entitysHttp.get("id").toString() );
+    	UUID uuidEndereco = UUID.fromString( mapHttp.get("id").toString() );
     	
     	path += "/"+uuidEndereco;
     	

@@ -50,8 +50,10 @@ public class EnderecosController {
 		log.info("stage=init method=EnderecosController.getById {}", id.toString());
 		
 		var endereco = clienteEnderecoService.getById( id );
-		
-        return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse(endereco) );
+
+		log.info("stage=end method=EnderecosController.getById {}", endereco);
+
+        return new ResponseBody<>( converter.converterDtoToResponse(endereco) );
     }
 
 	@ResponseStatus(code = HttpStatus.OK)
@@ -61,9 +63,11 @@ public class EnderecosController {
 		
 		log.info("stage=init method=EnderecosController.getAllByClient {}", idCliente.toString());
 		
-		var enderecos = converter.converterListDtoToListResponse(clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) ));
+		var enderecos = clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) );
 
-        return new ResponseBody<List<ClienteEnderecoResponse>>(enderecos);
+		log.info("stage=end method=EnderecosController.getAllByClient {} - {}", idCliente.toString(), enderecos);
+
+        return new ResponseBody<>(converter.converterListDtoToListResponse( enderecos ));
     }
 
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -73,23 +77,27 @@ public class EnderecosController {
 		log.info("stage=init method=EnderecosController.create {}", clienteEndereco);
 
     	ClienteEnderecoDto dto =  clienteEnderecoService.create( new ClienteDto(idCliente), converter.converterRequestToDto(clienteEndereco) );
-    	
-        return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse(dto) );
+
+		log.info("stage=end method=EnderecosController.create {}", dto);
+
+        return new ResponseBody<>( converter.converterDtoToResponse(dto) );
     }
 
 	@ResponseStatus(code = HttpStatus.OK)
     @PutMapping(path = "/{id}")
     public ResponseBody<ClienteEnderecoResponse> update(@PathVariable UUID idCliente, @PathVariable UUID id, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
 
+        log.info("stage=init method=EnderecosController.update {}", clienteEndereco);
+
     	var clienteEnderecoDto = converter.converterRequestToDto(clienteEndereco);
     	
     	clienteEnderecoDto.setId(id);
-		
-		log.info("stage=init method=EnderecosController.update {}", clienteEndereco);
 
     	ClienteEnderecoDto dto =  clienteEnderecoService.update( new ClienteDto(idCliente), clienteEnderecoDto);
-    	
-        return new ResponseBody<ClienteEnderecoResponse>( converter.converterDtoToResponse( dto ) );
+
+		log.info("stage=end method=EnderecosController.update {}", dto);
+
+        return new ResponseBody<>( converter.converterDtoToResponse( dto ) );
     }
 
 	@ResponseStatus(code = HttpStatus.OK)
@@ -99,6 +107,8 @@ public class EnderecosController {
 		log.info("stage=init method=EnderecosController.delete {} - {} ", idCliente.toString(), id.toString());
 		
     	clienteEnderecoService.delete( id );
+
+		log.info("stage=end method=EnderecosController.delete {} - {}", idCliente.toString(), id.toString());
     }
 
 }

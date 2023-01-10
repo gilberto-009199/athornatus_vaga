@@ -45,8 +45,10 @@ public class ClientesController {
 		log.info("stage=init method=ClientesControlller.getById {}",id.toString());
 		
 		var clienteDto = clienteService.getById(id);
+
+		log.info("stage=end method=ClientesController.getById {}", clienteDto);
 		
-		return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse( clienteDto ) );
+		return new ResponseBody<>( converter.converterDtoToResponse( clienteDto ) );
     }
 
 	@ResponseStatus(code = HttpStatus.OK)
@@ -54,8 +56,12 @@ public class ClientesController {
     public ResponseBody<List<ClienteResponse>> getAll() {
 		
 		log.info("stage=init method=ClientesControlller.getAll ");
-		
-		return new ResponseBody<List<ClienteResponse>>( converter.converterListDtoToListResponse( clienteService.getAll() ) );
+
+		var listClienteDto =  clienteService.getAll();
+
+		log.info("stage=end method=ClientesController.getAll {}", listClienteDto);
+
+		return new ResponseBody<>( converter.converterListDtoToListResponse( listClienteDto ) );
     }
 
 	@ResponseStatus(code = HttpStatus.CREATED)
@@ -64,9 +70,11 @@ public class ClientesController {
     	
 		log.info("stage=init method=ClientesControlller.create {}", cliente);
 		
-    	ClienteDto dto =  clienteService.create( converter.converterRequestToDto(cliente) );
+    	var dto =  clienteService.create( converter.converterRequestToDto(cliente) );
+
+		log.info("stage=end method=ClientesController.create {}", dto);
     	
-        return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse(dto) );
+        return new ResponseBody<>( converter.converterDtoToResponse(dto) );
     }
 
 	@ResponseStatus(code = HttpStatus.OK)
@@ -76,9 +84,11 @@ public class ClientesController {
 		
 		log.info("stage=init method=ClientesControlller.update {}", cliente);
     	
-    	ClienteDto dto =  clienteService.update(id, converter.converterRequestToDto(cliente) );
+    	var dto =  clienteService.update(id, converter.converterRequestToDto(cliente) );
+
+		log.info("stage=end method=ClientesController.create {}", dto);
     	
-        return new ResponseBody<ClienteResponse>( converter.converterDtoToResponse( dto ) );
+        return new ResponseBody<>( converter.converterDtoToResponse( dto ) );
     }
 
     @ResponseStatus(code = HttpStatus.OK)
@@ -88,6 +98,9 @@ public class ClientesController {
     	log.info("stage=init method=ClientesControlller.delete {}", id.toString());
     	
     	clienteService.delete( id );
+
+		log.info("stage=end method=ClientesControlller.delete {} - {}", id.toString());
+
     }
 
 }

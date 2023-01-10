@@ -47,7 +47,7 @@ public class EnderecosController {
     public ResponseBody<ClienteEnderecoResponse> getById( @PathVariable UUID id) {
 		
 		
-		log.info("stage=init method=EnderecosController.getById {}", id.toString());
+		log.info("stage=init method=EnderecosController.getById {}", id);
 		
 		var endereco = clienteEnderecoService.getById( id );
 
@@ -65,7 +65,7 @@ public class EnderecosController {
 		
 		var enderecos = clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) );
 
-		log.info("stage=end method=EnderecosController.getAllByClient {} - {}", idCliente.toString(), enderecos);
+		log.info("stage=end method=EnderecosController.getAllByClient {} - {}", idCliente, enderecos);
 
         return new ResponseBody<>(converter.converterListDtoToListResponse( enderecos ));
     }
@@ -104,11 +104,11 @@ public class EnderecosController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable UUID idCliente, @PathVariable UUID id) {
 		
-		log.info("stage=init method=EnderecosController.delete {} - {} ", idCliente.toString(), id.toString());
+		log.info("stage=init method=EnderecosController.delete {} - {} ", idCliente, id);
 		
     	clienteEnderecoService.delete( id );
 
-		log.info("stage=end method=EnderecosController.delete {} - {}", idCliente.toString(), id.toString());
+		log.info("stage=end method=EnderecosController.delete {} - {}", idCliente, id);
     }
 
 }

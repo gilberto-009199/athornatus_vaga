@@ -42,7 +42,7 @@ public class ClientesController {
 	@GetMapping(path = "/{id}")
     public ResponseBody<ClienteResponse> getById(@PathVariable UUID id) {
 
-		log.info("stage=init method=ClientesControlller.getById {}",id.toString());
+		log.info("stage=init method=ClientesControlller.getById {}",id);
 		
 		var clienteDto = clienteService.getById(id);
 
@@ -95,11 +95,11 @@ public class ClientesController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable UUID id) {
     	
-    	log.info("stage=init method=ClientesControlller.delete {}", id.toString());
+    	log.info("stage=init method=ClientesControlller.delete {}", id);
     	
     	clienteService.delete( id );
 
-		log.info("stage=end method=ClientesControlller.delete {} - {}", id.toString());
+		log.info("stage=end method=ClientesControlller.delete {} - {}", id);
 
     }
 

@@ -62,7 +62,9 @@ Uma Pessoa deve ter os seguintes campos:
 
   * [DOWNLOAD POSTMAN Collection](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/rest.postman_collection.json) - Postman Collection para consumir a API 
   * [DOWNLOAD POSTMAN Environment Collection](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/environment.postman_environment.json) - Postman  Environment Collection para consumir a API
-<video src="https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/postman_use.mp4"></video>
+
+<video src="https://user-images.githubusercontent.com/38070920/211644548-442c0f45-90d1-493f-8171-72227d68f2d5.mp4"></video>
+
 ## Bibliotecas
 
 * [SpringBoot](https://spring.io) - Plataforma para desenvolvimento web em java
@@ -72,6 +74,7 @@ Uma Pessoa deve ter os seguintes campos:
 * [ModelMapper](https://modelmapper.org/) - Biblioteca para agilizar o mapeamento de objetos(DTO, Entity, Request, Response)
 
 # Links da Documentação
+
 
 * [Documentacao swagger JSON](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/api-docs.json) - Arquivo de Documentacao em JSON
 * [Documentacao swagger YAML](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/api-docs.yaml) - Arquivo de Documentacao em YAML

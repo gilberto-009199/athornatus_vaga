@@ -62,7 +62,7 @@ Uma Pessoa deve ter os seguintes campos:
 
   * [DOWNLOAD POSTMAN Collection](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/rest.postman_collection.json) - Postman Collection para consumir a API 
   * [DOWNLOAD POSTMAN Environment Collection](https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/environment.postman_environment.json) - Postman  Environment Collection para consumir a API
-
+<video src="https://raw.githubusercontent.com/gilberto-009199/athornatus_vaga/main/postman_use.mp4"></video>
 ## Bibliotecas
 
 * [SpringBoot](https://spring.io) - Plataforma para desenvolvimento web em java

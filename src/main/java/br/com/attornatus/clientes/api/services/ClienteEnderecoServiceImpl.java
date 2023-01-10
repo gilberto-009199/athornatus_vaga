@@ -20,7 +20,10 @@ import br.com.attornatus.clientes.domain.entities.ClienteEntity;
 import br.com.attornatus.clientes.domain.exception.DomainException;
 import br.com.attornatus.clientes.domain.repositories.ClienteEnderecoRepository;
 
-
+/**
+ * Service responsavel pelo CRUD de endereco
+ * @author Gilberto Ramos de Oliveira<gilberto.tec@vivaldi.net>
+ */
 @Service
 public class ClienteEnderecoServiceImpl implements ClienteEnderecoService{
 		
@@ -112,7 +115,7 @@ public class ClienteEnderecoServiceImpl implements ClienteEnderecoService{
 		return converterEndereco.converterEntityToDto( clienteEnderecoEntity );
 	}
 
-	public List<ClienteEnderecoDto> createAllClienteEndereco(ClienteDto clienteDto, List<ClienteEnderecoDto> listEnderecos) {
+	public List<ClienteEnderecoDto> createAll(ClienteDto clienteDto, List<ClienteEnderecoDto> listEnderecos) {
 		
 		ClienteEntity clienteEntity = converterCliente.converterDtoToEntity( clienteDto );
 		
@@ -142,7 +145,6 @@ public class ClienteEnderecoServiceImpl implements ClienteEnderecoService{
 
 
 	public void delete(UUID id) {
-		
 		clienteEnderecoRepository.deleteByUUId( id );
 	}
 

@@ -18,6 +18,10 @@ import br.com.attornatus.clientes.domain.exception.DomainException;
 
 import br.com.attornatus.clientes.domain.repositories.ClienteRepository;
 
+/**
+ * Service responsavel pelo CRUD de cliente
+ * @author Gilberto Ramos de Oliveira<gilberto.tec@vivaldi.net>
+ */
 @Service
 public class ClienteServiceImpl implements ClienteService{
 
@@ -52,7 +56,7 @@ public class ClienteServiceImpl implements ClienteService{
 		
 		if(!cliente.getEnderecos().isEmpty()) {
 			
-			clienteEnderecoService.createAllClienteEndereco( cliente, cliente.getEnderecos());
+			clienteEnderecoService.createAll( cliente, cliente.getEnderecos());
 			
 			cliente.setEnderecos( clienteEnderecoService.getAllByCliente( cliente ) );
 		
@@ -71,7 +75,7 @@ public class ClienteServiceImpl implements ClienteService{
 		
 		if(!cliente.getEnderecos().isEmpty()) {
 			
-			clienteEnderecoService.createAllClienteEndereco( cliente, cliente.getEnderecos());
+			clienteEnderecoService.createAll( cliente, cliente.getEnderecos());
 			
 			cliente.setEnderecos( clienteEnderecoService.getAllByCliente( cliente ) );
 			

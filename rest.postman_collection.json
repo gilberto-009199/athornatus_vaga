@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Clientes e Enderecos",
-		"_postman_id": "08b1462a-359d-3fe4-e671-d51a3c166b56",
+		"_postman_id": "e4f3b248-9066-0e5e-cff1-21a00fd94798",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -13,13 +13,33 @@
 				"url": "{{host}}/cliente",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
 		},
 		{
 			"name": "CREATE Clientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"uuid_cliente\", jsonData.message.id);",
+							"",
+							"if(jsonData.message.enderecos.length > 0){",
+							"    postman.setEnvironmentVariable(\"uuid_cliente_endereco\", jsonData.message.enderecos[0].id);",
+							"}",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"url": "{{host}}/cliente",
 				"method": "POST",
@@ -40,8 +60,24 @@
 		},
 		{
 			"name": "UPDATE Clientes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"if(jsonData.message.enderecos.length > 0){",
+							"    postman.setEnvironmentVariable(\"uuid_cliente_endereco\", jsonData.message.enderecos[0].id);",
+							"}",
+							""
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667",
+				"url": "{{host}}/cliente/{{uuid_cliente}}",
 				"method": "PUT",
 				"header": [
 					{
@@ -61,7 +97,7 @@
 		{
 			"name": "INFO Cliente",
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667",
+				"url": "{{host}}/cliente/{{uuid_cliente}}",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -72,7 +108,7 @@
 		{
 			"name": "DELETE Cliente",
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667",
+				"url": "{{host}}/cliente/{{uuid_cliente}}",
 				"method": "DELETE",
 				"header": [],
 				"body": {},
@@ -83,7 +119,7 @@
 		{
 			"name": "LIST Enderecos",
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco",
+				"url": "{{host}}/cliente/{{uuid_cliente}}/endereco",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -93,8 +129,22 @@
 		},
 		{
 			"name": "CREATE Enderecos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"postman.setEnvironmentVariable(\"uuid_cliente_endereco\", jsonData.message.id);",
+							""
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco",
+				"url": "{{host}}/cliente/{{uuid_cliente}}/endereco",
 				"method": "POST",
 				"header": [
 					{
@@ -114,7 +164,7 @@
 		{
 			"name": "UPDATE Enderecos",
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco/81dd8b20-be47-4de9-b328-2693a5f7da6b",
+				"url": "{{host}}/cliente/{{uuid_cliente}}/endereco/{{uuid_cliente_endereco}}",
 				"method": "PUT",
 				"header": [
 					{
@@ -134,7 +184,7 @@
 		{
 			"name": "DELETE Enderecos",
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco/81dd8b20-be47-4de9-b328-2693a5f7da6b",
+				"url": "{{host}}/cliente/{{uuid_cliente}}/endereco/{{uuid_cliente_endereco}}",
 				"method": "DELETE",
 				"header": [
 					{
@@ -151,7 +201,7 @@
 		{
 			"name": "INFO Enderecos",
 			"request": {
-				"url": "{{host}}/cliente/d0ec22de-c190-4d04-aade-e09810188667/endereco/81dd8b20-be47-4de9-b328-2693a5f7da6b",
+				"url": "{{host}}/cliente/{{uuid_cliente}}/endereco/{{uuid_cliente_endereco}}",
 				"method": "GET",
 				"header": [
 					{

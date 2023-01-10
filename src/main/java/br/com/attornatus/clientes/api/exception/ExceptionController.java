@@ -41,7 +41,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
 		
-		log.info(String.format("BAD_REQUEST API %s - %s", ex.getCode() ,message));
+		log.info("stage=exception method=ExceptionController.handleAPI {} - {}", ex.getCode(), message);
 		
         return new ResponseBody<>(new  ResponseError( ex.getCode(), message));
     }
@@ -52,7 +52,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
 		
-		log.info(String.format("BAD_REQUEST BUSINESS %s - %s", ex.getCode() ,message));
+		log.info("stage=exception method=ExceptionController.handleBusiness {} - {}", ex.getCode(), message);
 		
 		return new ResponseBody<>(new  ResponseError( ex.getCode(), message));
     }
@@ -63,7 +63,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
 		
-		log.info(String.format("BAD_REQUEST DOMAIN %s - %s", ex.getCode() ,message));
+		log.info("stage=exception method=ExceptionController.handleDomain {} - {}", ex.getCode(), message);
 		
         return new ResponseBody<>(new  ResponseError( ex.getCode(), message));
     }
@@ -80,7 +80,9 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		
 		for(ObjectError methodArgumentNotValidException : ex.getBindingResult().getAllErrors()) {
 			erros.add( new ResponseError("VALID", methodArgumentNotValidException.getDefaultMessage()) );
-			log.info(String.format("BAD_REQUEST VALID - %s", methodArgumentNotValidException.getDefaultMessage() ));
+
+			log.info("stage=exception method=ExceptionController.handleMethodArgumentNotValid VALID - {}", methodArgumentNotValidException.getDefaultMessage() );
+			
 		}
 		
 		ResponseBody<?> res = new ResponseBody<>(erros);
@@ -97,8 +99,8 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		
 		ResponseBody<?> res = new ResponseBody<>(new ResponseError( "VALID", ex.getMessage()));
 		
-		log.info(String.format("BAD_REQUEST VALID - %s", ex.getMessage() ));
-		
+		log.info("stage=exception method=ExceptionController.handleHttpMessageNotReadable VALID - {}", ex.getMessage() );
+
         return ResponseEntity.badRequest().body( res );	 
 	}
 

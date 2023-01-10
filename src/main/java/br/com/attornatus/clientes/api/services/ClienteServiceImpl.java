@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.attornatus.clientes.api.converters.ClienteConverter;
 import br.com.attornatus.clientes.business.dto.ClienteDto;
+import br.com.attornatus.clientes.business.services.ClienteEnderecoService;
 import br.com.attornatus.clientes.business.services.ClienteService;
 import br.com.attornatus.clientes.domain.entities.ClienteEntity;
 import br.com.attornatus.clientes.domain.exception.DomainException;
@@ -24,7 +25,7 @@ public class ClienteServiceImpl implements ClienteService{
 	private ClienteRepository clienteRepository;
 
 	@Autowired
-	private ClienteEnderecoServiceImpl clienteEnderecoService;
+	private ClienteEnderecoService clienteEnderecoService;
 
 	@Autowired
 	private ClienteConverter converter;

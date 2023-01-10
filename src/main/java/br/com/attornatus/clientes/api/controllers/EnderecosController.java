@@ -46,7 +46,8 @@ public class EnderecosController {
 	@GetMapping(path = "/{id}")
     public ResponseBody<ClienteEnderecoResponse> getById( @PathVariable UUID id) {
 		
-		log.info(String.format("REQUEST Cliente Endereco %s", id.toString()) );
+		
+		log.info("stage=init method=EnderecosController.getById {}", id.toString());
 		
 		var endereco = clienteEnderecoService.getById( id );
 		
@@ -57,7 +58,8 @@ public class EnderecosController {
 	@GetMapping
     public ResponseBody<List<ClienteEnderecoResponse>> getAllByClient(@PathVariable UUID idCliente) {
 		
-		log.info(String.format("REQUEST ALL Cliente %s Endereco ", idCliente.toString()) );
+		
+		log.info("stage=init method=EnderecosController.getAllByClient {}", idCliente.toString());
 		
 		var enderecos = converter.converterListDtoToListResponse(clienteEnderecoService.getAllByCliente( new ClienteDto(idCliente) ));
 
@@ -68,7 +70,7 @@ public class EnderecosController {
     @PostMapping
     public ResponseBody<ClienteEnderecoResponse> create(@PathVariable UUID idCliente, @Valid @RequestBody ClienteEnderecoRequest clienteEndereco) {
 
-		log.info(String.format("CREATE Cliente %s Endereco %s", idCliente.toString(), clienteEndereco.getCep()) );
+		log.info("stage=init method=EnderecosController.create {}", clienteEndereco);
 
     	ClienteEnderecoDto dto =  clienteEnderecoService.create( new ClienteDto(idCliente), converter.converterRequestToDto(clienteEndereco) );
     	
@@ -82,8 +84,8 @@ public class EnderecosController {
     	var clienteEnderecoDto = converter.converterRequestToDto(clienteEndereco);
     	
     	clienteEnderecoDto.setId(id);
-
-		log.info(String.format( "UPDATE Cliente %s Endereco %s", idCliente.toString(), id.toString() ) );
+		
+		log.info("stage=init method=EnderecosController.update {}", clienteEndereco);
 
     	ClienteEnderecoDto dto =  clienteEnderecoService.update( new ClienteDto(idCliente), clienteEnderecoDto);
     	
@@ -94,7 +96,7 @@ public class EnderecosController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable UUID idCliente, @PathVariable UUID id) {
 		
-		log.info(String.format( "DELETE Cliente %s Endereco %s", idCliente.toString(), id.toString() ) );
+		log.info("stage=init method=EnderecosController.delete {} - {} ", idCliente.toString(), id.toString());
 		
     	clienteEnderecoService.delete( id );
     }

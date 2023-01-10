@@ -42,7 +42,7 @@ public class ClientesController {
 	@GetMapping(path = "/{id}")
     public ResponseBody<ClienteResponse> getById(@PathVariable UUID id) {
 
-		log.info(String.format("REQUEST Cliente %s", id.toString()) );
+		log.info("stage=init method=ClientesControlller.getById {}",id.toString());
 		
 		var clienteDto = clienteService.getById(id);
 		
@@ -53,7 +53,7 @@ public class ClientesController {
 	@GetMapping
     public ResponseBody<List<ClienteResponse>> getAll() {
 		
-		log.info("REQUEST ALL Clientes");
+		log.info("stage=init method=ClientesControlller.getAll ");
 		
 		return new ResponseBody<List<ClienteResponse>>( converter.converterListDtoToListResponse( clienteService.getAll() ) );
     }
@@ -62,7 +62,7 @@ public class ClientesController {
     @PostMapping
     public ResponseBody<ClienteResponse> create(@Valid @RequestBody ClienteRequest cliente) {
     	
-		log.info(String.format("CREATE Cliente %s", cliente.getNome()) );
+		log.info("stage=init method=ClientesControlller.create {}", cliente);
 		
     	ClienteDto dto =  clienteService.create( converter.converterRequestToDto(cliente) );
     	
@@ -73,7 +73,8 @@ public class ClientesController {
     @PutMapping(path = "/{id}")
     public ResponseBody<ClienteResponse> update(@PathVariable UUID id, @Valid @RequestBody ClienteRequest cliente) {
 		
-		log.info(String.format("UPDATE Cliente %s", id.toString()) );
+		
+		log.info("stage=init method=ClientesControlller.update {}", cliente);
     	
     	ClienteDto dto =  clienteService.update(id, converter.converterRequestToDto(cliente) );
     	
@@ -84,7 +85,7 @@ public class ClientesController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable UUID id) {
     	
-    	log.info(String.format("DELETE Cliente %s", id.toString()) );
+    	log.info("stage=init method=ClientesControlller.delete {}", id.toString());
     	
     	clienteService.delete( id );
     }

@@ -13,13 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.attornatus.clientes.api.controllers.EnderecosController;
 import br.com.attornatus.clientes.api.response.ResponseBody;
 import br.com.attornatus.clientes.api.response.ResponseError;
 import br.com.attornatus.clientes.business.exception.BusinessException;
@@ -30,13 +28,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestControllerAdvice(basePackages = {"br.com.attornatus.clientes.api.controllers"})
 @Slf4j
-public class ExceptionController extends ResponseEntityExceptionHandler {
+public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Autowired
 	private MessageSource messageSource;
 
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({APIException.class})
+	@org.springframework.web.bind.annotation.ExceptionHandler({APIException.class})
     private ResponseBody<?> handleAPI(APIException ex) {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
@@ -47,7 +45,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     }
 
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({BusinessException.class})
+	@org.springframework.web.bind.annotation.ExceptionHandler({BusinessException.class})
     private ResponseBody<?> handleBusiness(BusinessException ex) {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);
@@ -58,7 +56,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
     }
 	
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	@ExceptionHandler({DomainException.class})
+	@org.springframework.web.bind.annotation.ExceptionHandler({DomainException.class})
     private ResponseBody<?> handleDomain(DomainException ex) {
 		
 		String message = messageSource.getMessage( ex.getMessage(), null, null);

@@ -8,6 +8,10 @@
 
 ![Tela inicial](./API_Example.gif)
 
+<img align="right" src="./assets/spring16x16.svg" alt="Spring Boot" width="32px"/>
+<img align="right" src="./assets/docker16x16.svg" alt="Docker" width="32px"/>
+<img align="right" src="./assets/swagger.svg" alt="Bootstrap" width="32px"/>
+
 Backend com API simples para gerenciar Pessoas e Endereços. Usando **SpringBoot**, **Swagger** e **Lombok**.
 
 ### How Run:

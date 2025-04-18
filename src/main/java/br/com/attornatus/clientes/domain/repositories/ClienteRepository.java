@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import br.com.attornatus.clientes.domain.entities.ClienteEntity;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<ClienteEntity, Long>{
+public interface ClienteRepository extends JpaRepository<ClienteEntity, UUID>{
 	
 	Optional<ClienteEntity> findById(UUID id);
 

@@ -15,7 +15,7 @@ import br.com.attornatus.clientes.domain.entities.ClienteEnderecoEntity;
 import br.com.attornatus.clientes.domain.entities.ClienteEntity;
 
 @Repository
-public interface ClienteEnderecoRepository extends JpaRepository<ClienteEnderecoEntity, Long>{
+public interface ClienteEnderecoRepository extends JpaRepository<ClienteEnderecoEntity, UUID>{
 	
 	Optional<ClienteEnderecoEntity> findById(UUID id);
 	

@@ -8,6 +8,18 @@
 
 ![Tela inicial](./API_Example.gif)
 
+Backend com API simples para gerenciar Pessoas e Endereços. Usando **SpringBoot**, **Swagger** e **Lombok**.
+
+### How Run:
+#### Docker:
+```shell
+$ docker compose up
+```
+#### Maven:
+```shell
+$ ./mvnw clean package
+```
+
 ## Links
 - [Execução](#execução)
 - [Status](#status)

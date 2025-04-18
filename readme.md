@@ -62,20 +62,7 @@ Uma Pessoa deve ter os seguintes campos:
 | Tests da API             | :green_circle:  |
 |  Tests dos Services      | :green_circle:  |
 
-# Execução
- Há duas formas de subir o projeto: instalando direto em sua máquina ou subindo em containeres Docker.
- ### Maven
-```
- mvn install
- cd target
- java -jar clientes-0.0.1-SNAPSHOT.jar
-```
 
-### Docker
-```
- docker build --no-cache --tag=myserver:latest .
- docker run --rm -it -p 8080:8080 myserver:latest
-```
 ### Consumindo API
   Os links para os arquivos de configuração então abaixo:
 

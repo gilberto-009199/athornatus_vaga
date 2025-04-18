@@ -10,9 +10,10 @@
 
 <img align="right" src="./assets/spring16x16.svg" alt="Spring Boot" width="32px"/>
 <img align="right" src="./assets/docker16x16.svg" alt="Docker" width="32px"/>
-<img align="right" src="./assets/swagger.svg" alt="Bootstrap" width="32px"/>
+<img align="right" src="./assets/swagger.svg" alt="Swagger" width="32px"/>
+<img align="right" src="./assets/lombok.svg" alt="Lombok" width="32px"/>
 
-Backend com API simples para gerenciar Pessoas e Endereços. Usando **SpringBoot**, **Swagger** e **Lombok**.
+Backend com API simples para gerenciar Pessoas e Endereços. Usando **SpringBoot**, **Swagger**, **Lombok** e **Docker**.
 
 ### How Run:
 #### Docker:

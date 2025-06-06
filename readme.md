@@ -8,10 +8,10 @@
 
 ![Tela inicial](./API_Example.gif)
 
-<img align="right" src="./assets/spring16x16.svg" alt="Spring Boot" width="32px"/>
-<img align="right" src="./assets/docker16x16.svg" alt="Docker" width="32px"/>
-<img align="right" src="./assets/swagger.svg" alt="Swagger" width="32px"/>
-<img align="right" src="./assets/lombok.svg" alt="Lombok" width="32px"/>
+<img align="right" src="https://filedn.com/l3HMwWFeFPE7q4xHdixbsqH/github.assets/spring16x16.svg" alt="Spring Boot" width="32px"/>
+<img align="right" src="https://filedn.com/l3HMwWFeFPE7q4xHdixbsqH/github.assets/docker16x16.svg" alt="Docker" width="32px"/>
+<img align="right" src="https://filedn.com/l3HMwWFeFPE7q4xHdixbsqH/github.assets/swagger.svg" alt="Swagger" width="32px"/>
+<img align="right" src="https://filedn.com/l3HMwWFeFPE7q4xHdixbsqH/github.assets/lombok.svg" alt="Lombok" width="32px"/>
 
 Backend com API simples para gerenciar Pessoas e Endereços. Usando **SpringBoot**, **Swagger**, **Lombok** e **Docker**.
 
